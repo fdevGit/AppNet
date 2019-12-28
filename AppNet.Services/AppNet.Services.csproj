@@ -31,8 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +45,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\MapperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Infastructure\IBaseService.cs" />
+    <Compile Include="Services\Infastructure\IRoleService.cs" />
+    <Compile Include="Services\Managers\UserManager.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AppNet.Core\AppNet.Core.csproj">
+      <Project>{f05979cf-41c8-417d-b13d-e2acec6ce6b0}</Project>
+      <Name>AppNet.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppNet.Domain\AppNet.Domain.csproj">
+      <Project>{f7f28c57-061b-4273-9fea-88e53fd2aab6}</Project>
+      <Name>AppNet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppNet.EFramework\AppNet.EFramework.csproj">
+      <Project>{7607a697-08a1-444a-9791-287bdf88a64f}</Project>
+      <Name>AppNet.EFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppNet.Repository\AppNet.Repository.csproj">
+      <Project>{ee5f338d-3c80-4be0-ad94-96508045647e}</Project>
+      <Name>AppNet.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

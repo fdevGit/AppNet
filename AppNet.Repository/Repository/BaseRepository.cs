@@ -13,8 +13,8 @@ namespace AppNet.Repository.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
     {
-        private readonly AppDbContext context;
-        private readonly DbSet<T> entityObject;
+        protected readonly AppDbContext context;
+        protected readonly DbSet<T> entityObject;
         public BaseRepository()
         {
             context = new AppDbContext();
@@ -34,7 +34,9 @@ namespace AppNet.Repository.Repository
 
         public T Create(T entity)
         {
-            throw new NotImplementedException();
+            entityObject.Add(entity);
+            SaveChanges();
+            return entity;
         }
 
         public bool Deactivate(T entity)
@@ -76,9 +78,9 @@ namespace AppNet.Repository.Repository
                 context.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
