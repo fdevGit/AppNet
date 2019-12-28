@@ -51,11 +51,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDbContext.cs" />
+    <Compile Include="Migrations\201912280815568_First.cs" />
+    <Compile Include="Migrations\201912280815568_First.designer.cs">
+      <DependentUpon>201912280815568_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912280932369_Update.cs" />
+    <Compile Include="Migrations\201912280932369_Update.designer.cs">
+      <DependentUpon>201912280932369_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppNet.Domain\AppNet.Domain.csproj">
+      <Project>{F7F28C57-061B-4273-9FEA-88E53FD2AAB6}</Project>
+      <Name>AppNet.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912280815568_First.resx">
+      <DependentUpon>201912280815568_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912280932369_Update.resx">
+      <DependentUpon>201912280932369_Update.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -17,6 +17,5 @@ namespace AppNet.Domain.Models
         public string Name { get; set; }
         public bool Status { get; set; }
 
-
     }
 }

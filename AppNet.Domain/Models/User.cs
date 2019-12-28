@@ -23,5 +23,6 @@ namespace AppNet.Domain.Models
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public DateTime LastLoginDate { get; set; }
+        public bool Status { get ; set ; }
     }
 }

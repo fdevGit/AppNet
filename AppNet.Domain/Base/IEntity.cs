@@ -11,7 +11,7 @@ namespace AppNet.Domain.Base
     {
         [Key]
         int Id { get; set; }
-
+        bool Status { get; set; }
 
     }
 }
