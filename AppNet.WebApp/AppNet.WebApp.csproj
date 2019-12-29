@@ -129,6 +129,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Account\Roles.cshtml" />
+    <Content Include="Views\Account\RoleCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

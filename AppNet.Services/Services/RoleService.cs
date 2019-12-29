@@ -25,6 +25,9 @@ namespace AppNet.Services.Services
         {
             try
             {
+                model.CreatedOn = DateTime.Now;
+                model.ModifiedOn = DateTime.Now;
+
                 var roleObject = repos.Create(mapper.Map<RoleViewModel, Role>(model));
                 return mapper.Map<Role, RoleViewModel>(roleObject);
             }
