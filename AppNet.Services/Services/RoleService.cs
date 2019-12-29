@@ -50,7 +50,7 @@ namespace AppNet.Services.Services
             throw new NotImplementedException();
         }
 
-        public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> expression)
+        public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> expression = null)
         {
             throw new NotImplementedException();
         }

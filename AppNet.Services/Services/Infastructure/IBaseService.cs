@@ -14,7 +14,7 @@ namespace AppNet.Services.Services.Infastructure
         bool Delete(int id);
 
         T Get(int id);
-        List<T> GetAll(Expression<Func<T, bool>> expression);
+        List<T> GetAll(Expression<Func<T, bool>> expression = null);
 
     }
 }
