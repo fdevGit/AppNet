@@ -33,7 +33,8 @@ namespace AppNet.Repository.Repository
 
         public User Login(string userName, string password)
         {
-            throw new NotImplementedException();
+            return GetAll(t => t.EmailAddress == userName && t.Password == password).FirstOrDefault();
+            //return entityObject.FirstOrDefault();
         }
 
         public bool LostPassword(string userName)
