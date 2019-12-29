@@ -56,7 +56,7 @@ namespace AppNet.Services.Services
         public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> predicate = null)
         {
             var roleList = repos.GetAll().ToList();
-            var roleViewModelList = roleList.Select(p => mapper.Map<Role, RoleViewModel>(p)).ToList();
+            var roleViewModelList = roleList.Select(p => mapper.Map<Role, RoleViewModel>(p));
             if (predicate == null) return roleViewModelList.ToList();
             return roleViewModelList.AsQueryable().Where(predicate).ToList();
         }
