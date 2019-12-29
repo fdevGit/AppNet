@@ -50,9 +50,12 @@ namespace AppNet.Services.Services
             throw new NotImplementedException();
         }
 
-        public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> expression = null)
+        public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> predicate = null)
         {
-            throw new NotImplementedException();
+            var roleList = repos.GetAll().ToList();
+            var roleViewModelList = roleList.Select(p => mapper.Map<Role, RoleViewModel>(p)).ToList();
+            if (predicate == null) return roleViewModelList.ToList();
+            return roleViewModelList.AsQueryable().Where(predicate).ToList();
         }
 
         public bool Update(RoleViewModel model)

@@ -19,7 +19,8 @@ namespace AppNet.WebApp.Controllers
         // GET: Account
         public ActionResult Roles()
         {
-            return View();
+            var model = roleService.GetAll();
+            return View(model);
         }
     }
 }

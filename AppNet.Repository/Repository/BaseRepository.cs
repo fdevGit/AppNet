@@ -66,8 +66,9 @@ namespace AppNet.Repository.Repository
             return entityObject.FirstOrDefault(t => t.Id == Id);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate = null)
         {
+            if (predicate == null) return entityObject;
             return entityObject.Where(predicate);
         }
 

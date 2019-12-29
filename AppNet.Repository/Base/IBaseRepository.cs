@@ -11,7 +11,7 @@ namespace AppNet.Repository.Base
     public interface IBaseRepository<T> where T : class, IEntity
     {
         T Get(int Id);
-        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
+        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate = null);
 
         T Create(T entity);
         bool Update(T entity);

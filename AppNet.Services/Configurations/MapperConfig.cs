@@ -21,10 +21,11 @@ namespace AppNet.Services.Configurations
             {
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<UserViewModel, User>();
+                cfg.CreateMap<Role, RoleViewModel>().ReverseMap();
                 //.ForMember(t => t.Nane, t => t.MapFrom(c => c.Password))
                 //.AfterMap(UserToViewModel<User, UserViewModel>())
             });
-            configuration.AssertConfigurationIsValid();
+            //configuration.AssertConfigurationIsValid();
             return configuration;
             //var mapper = new Mapper(configuration);
             //var userObject = new User() { Name = "Adminx" };
