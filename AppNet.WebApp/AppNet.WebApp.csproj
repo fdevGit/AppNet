@@ -178,6 +178,10 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppNet.Repository\AppNet.Repository.csproj">
+      <Project>{ee5f338d-3c80-4be0-ad94-96508045647e}</Project>
+      <Name>AppNet.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AppNet.Services\AppNet.Services.csproj">
       <Project>{8B4C524C-BF4A-4E0C-A6AF-D4BB7EFDFE0D}</Project>
       <Name>AppNet.Services</Name>

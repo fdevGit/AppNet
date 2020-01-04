@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace AppNet.Services.Services.Managers
+namespace AppNet.Services.Service.Managers
 {
     public class UserManager
     {

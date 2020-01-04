@@ -1,4 +1,4 @@
-﻿using AppNet.Services.Services.Managers;
+﻿using AppNet.Services.Service.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

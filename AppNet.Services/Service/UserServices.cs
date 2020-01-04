@@ -1,7 +1,7 @@
 ﻿using AppNet.Domain.Models;
 using AppNet.Repository.Repository;
-using AppNet.Services.Services.Infastructure;
-using AppNet.Services.Services.Managers;
+using AppNet.Services.Service.Infastructure;
+using AppNet.Services.Service.Managers;
 using AppNet.Services.ViewModels;
 using AutoMapper;
 using System;
@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppNet.Services.Services
+namespace AppNet.Services.Service
 {
     public class UserServices : IUserService
     {

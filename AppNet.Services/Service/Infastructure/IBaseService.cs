@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace AppNet.Services.Services.Infastructure
+namespace AppNet.Services.Service.Infastructure
 {
     public interface IBaseService<T> where T : BaseViewModel
     {

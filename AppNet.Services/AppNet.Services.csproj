@@ -48,12 +48,12 @@
   <ItemGroup>
     <Compile Include="Configurations\MapperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Infastructure\IBaseService.cs" />
-    <Compile Include="Services\Infastructure\IRoleService.cs" />
-    <Compile Include="Services\Infastructure\IUserService.cs" />
-    <Compile Include="Services\Managers\UserManager.cs" />
-    <Compile Include="Services\RoleService.cs" />
-    <Compile Include="Services\UserServices.cs" />
+    <Compile Include="Service\Infastructure\IBaseService.cs" />
+    <Compile Include="Service\Infastructure\IRoleService.cs" />
+    <Compile Include="Service\Infastructure\IUserService.cs" />
+    <Compile Include="Service\Managers\UserManager.cs" />
+    <Compile Include="Service\RoleService.cs" />
+    <Compile Include="Service\UserServices.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />

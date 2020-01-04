@@ -1,4 +1,4 @@
-﻿using AppNet.Services.Services;
+﻿using AppNet.Services.Service;
 using AppNet.Services.ViewModels;
 using AppNet.WebApp.Attributes;
 using System;

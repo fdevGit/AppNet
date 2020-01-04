@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppNet.Services.Services.Infastructure
+namespace AppNet.Services.Service.Infastructure
 {
     public interface IRoleService : IBaseService<RoleViewModel>
     {

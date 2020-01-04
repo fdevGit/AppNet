@@ -18,6 +18,14 @@ namespace AppNet.WebApp
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(AppNet.Services.Service.UserServices))
+                ).Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(AppNet.Repository.Repository.UserRepository)))
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces();
+
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
