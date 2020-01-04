@@ -19,10 +19,10 @@ namespace AppNet.Domain.Models
         public string SurName { get; set; }
 
         [NotMapped]
-        public string FullName { get { return string.Format("{0} {1}", Name, SurName); } }
+        public string FullName { get { return string.Format("{0} {1}", Name, SurName); } set { Name = value.Split(' ')[0]; SurName = value.Split(' ')[1]; } }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public DateTime LastLoginDate { get; set; }
-        public bool Status { get ; set ; }
+        public bool Status { get; set; }
     }
 }

@@ -26,7 +26,13 @@ namespace AppNet.Services.Services
         }
         public UserViewModel Create(UserViewModel model)
         {
-            throw new NotImplementedException();
+            var userObject = mapper.Map<UserViewModel, User>(model);
+            userObject.CreateOn = DateTime.Now;
+            userObject.ModifyOn = DateTime.Now;
+            userObject.LastLoginDate = DateTime.Now;
+            userObject = repository.Create(userObject);
+            model = mapper.Map<User, UserViewModel>(userObject);
+            return model;
         }
 
         public bool Delete(UserViewModel model)
@@ -44,9 +50,12 @@ namespace AppNet.Services.Services
             throw new NotImplementedException();
         }
 
-        public List<UserViewModel> GetAll(Expression<Func<UserViewModel, bool>> expression = null)
+        public List<UserViewModel> GetAll(Expression<Func<UserViewModel, bool>> predicate = null)
         {
-            throw new NotImplementedException();
+            var userList = repository.GetAll().ToList();
+            var userViewModelList = userList.Select(p => mapper.Map<User, UserViewModel>(p));
+            if (predicate == null) return userViewModelList.ToList();
+            return userViewModelList.AsQueryable().Where(predicate).ToList();
         }
 
         public bool Login(UserViewModel model)

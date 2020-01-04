@@ -19,11 +19,15 @@ namespace AppNet.Services.Configurations
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<UserViewModel, User>();
+
+                cfg.CreateMap<UserViewModel, User>()
+               .ForMember(t => t.Name, c => c.MapFrom(k => k.FullName))
+               .ForMember(t => t.EmailAddress, c => c.MapFrom(k => k.UserName))
+               .ReverseMap()
+                ;
                 cfg.CreateMap<Role, RoleViewModel>()
-                    .ForMember(p=>p.ModifiedOn,c=>c.MapFrom(x=>x.ModifyOn))
-                    .ForMember(p=>p.CreatedOn,c=>c.MapFrom(x=>x.CreateOn))
+                    .ForMember(p => p.ModifiedOn, c => c.MapFrom(x => x.ModifyOn))
+                    .ForMember(p => p.CreatedOn, c => c.MapFrom(x => x.CreateOn))
                     .ReverseMap();
                 //.ForMember(t => t.Nane, t => t.MapFrom(c => c.Password))
                 //.AfterMap(UserToViewModel<User, UserViewModel>())
