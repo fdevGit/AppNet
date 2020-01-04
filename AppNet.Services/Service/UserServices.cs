@@ -1,4 +1,5 @@
 ﻿using AppNet.Domain.Models;
+using AppNet.Repository.Infrastructure;
 using AppNet.Repository.Repository;
 using AppNet.Services.Service.Infastructure;
 using AppNet.Services.Service.Managers;
@@ -13,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace AppNet.Services.Service
 {
-    public class UserServices : IUserService
+    public class UserService : IUserService
     {
-        UserRepository repository;
+        IUserRepository repository;
         Mapper mapper;
 
-        public UserServices()
+        public UserService(IUserRepository _userRepository)
         {
-            repository = new UserRepository();
+            repository = _userRepository;
             var mapperConf = Configurations.MapperConfig.Configure();
             mapper = new Mapper(mapperConf);
         }

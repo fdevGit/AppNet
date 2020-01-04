@@ -15,9 +15,9 @@ namespace AppNet.Repository.Repository
     {
         protected readonly AppDbContext context;
         protected readonly DbSet<T> entityObject;
-        public BaseRepository()
+        public BaseRepository(AppDbContext _context)
         {
-            context = new AppDbContext();
+            context = _context;
             entityObject = context.Set<T>();
         }
         public bool Activate(T entity)

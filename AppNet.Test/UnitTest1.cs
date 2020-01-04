@@ -29,9 +29,9 @@ namespace AppNet.Test
         [TestMethod]
         public void TestMethod2()
         {
-            BaseRepository<Role> repository = new Repository.Repository.BaseRepository<Role>();
+            //BaseRepository<Role> repository = new Repository.Repository.BaseRepository<Role>();
 
-            repository.Activate(1);
+            //repository.Activate(1);
         }
         [TestMethod]
         public void TestMethod3()

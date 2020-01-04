@@ -1,4 +1,5 @@
 ﻿using AppNet.Domain.Models;
+using AppNet.EFramework;
 using AppNet.Repository.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace AppNet.Repository.Repository
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
 
-        public UserRepository() : base()
+        public UserRepository(AppDbContext _context) : base(_context)
         {
 
         }

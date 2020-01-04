@@ -1,4 +1,5 @@
 ﻿using AppNet.Domain.Models;
+using AppNet.Repository.Base;
 using AppNet.Repository.Repository;
 using AppNet.Services.Service.Infastructure;
 using AppNet.Services.ViewModels;
@@ -14,10 +15,11 @@ namespace AppNet.Services.Service
 {
     public class RoleService : IRoleService
     {
-        BaseRepository<Role> repos = new BaseRepository<Role>();
+        IBaseRepository<Role> repos;
         Mapper mapper;
-        public RoleService()
+        public RoleService(IBaseRepository<Role> _baseRepository)
         {
+            repos = _baseRepository;
             var mapperConfig = Configurations.MapperConfig.Configure();
             mapper = new Mapper(mapperConfig);
         }

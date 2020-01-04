@@ -1,34 +1,26 @@
-﻿using AppNet.Services.Service;
+﻿using AppNet.Services.Service.Infastructure;
 using AppNet.Services.ViewModels;
 using AppNet.WebApp.Attributes;
+using AppNet.WebApp.ViewModel;
+using CuttingEdge.Conditions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AppNet.WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        RoleService roleService;
-        UserServices userServices;
+        IRoleService roleService;
+        IUserService userServices;
 
-        public AccountController()
+        public AccountController(IRoleService _roleService, IUserService _userService)
         {
-            roleService = new RoleService();
-            userServices = new UserServices();
+            roleService = _roleService;
+            userServices = _userService;
         }
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            //base.OnActionExecuted(filterContext);
-            //if (filterContext == null && filterContext.ActionDescriptor.ActionName != "Login")
-            //{
-            //    RedirectToAction("Login");
-            //}
-        }
-
-        [AppAuthorize]
+       
+        //[AppAuthorize]
         public ActionResult Roles()
         {
             var model = roleService.GetAll();
@@ -44,24 +36,30 @@ namespace AppNet.WebApp.Controllers
         [AppAuthorize]
         public ActionResult RoleCreate(RoleViewModel model)
         {
-            if (ModelState.IsValid)
+
+            //int sayi = 50;
+            //string adi = "admn";
+
+            //Condition.Requires(adi).Contains(" ").IsNullOrEmpty().HasLength(20).IsNotEmpty().StartsWith("a");
+
+            //Condition.Requires(sayi).IsInRange(0, 20);
+
+            try
             {
+                Condition.Requires(ModelState.IsValid).IsTrue("Model");
+
                 roleService.Create(model);
-                if (model.IsError)
+                Condition.Requires(model.IsError).IsFalse("create Error");
+                for (int i = 0; i < model.Errors.Count; i++)
                 {
-                    for (int i = 0; i < model.Errors.Count; i++)
-                    {
-                        ModelState.AddModelError("error" + i, model.Errors[i]);
-                    }
-                    return View(model);
+                    ModelState.AddModelError("error" + i, model.Errors[i]);
                 }
-                else
-                {
-                    return RedirectToAction("Roles");
-                }
+                return RedirectToAction("Roles");
+
             }
-            else
+            catch (Exception ex)
             {
+                Response.Write(ex.Message);
                 return View(model);
             }
         }
@@ -98,6 +96,37 @@ namespace AppNet.WebApp.Controllers
                 }
             }
             else
+            {
+                return View(model);
+            }
+        }
+
+        public ActionResult Login()
+        {
+            var model = new LoginViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            List<string> x = new List<string>();
+
+            x.ForEach(t => { });
+
+
+            try
+            {
+                Condition.Requires(model.EmailAddress).IsNotNull().Contains("@").Contains(".").IsLongerOrEqual(10);
+                Condition.Requires(model.Password).IsNotNull().IsLongerOrEqual(5);
+
+                var loginResult = userServices.Login(new UserViewModel() { UserName = model.EmailAddress, Password = model.Password });
+
+                Condition.Requires(loginResult).IsTrue();
+
+                return RedirectToAction("Roles");
+            }
+            catch (Exception)
             {
                 return View(model);
             }
