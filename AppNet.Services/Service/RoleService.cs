@@ -4,6 +4,7 @@ using AppNet.Repository.Repository;
 using AppNet.Services.Service.Infastructure;
 using AppNet.Services.ViewModels;
 using AutoMapper;
+using CuttingEdge.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,17 +43,21 @@ namespace AppNet.Services.Service
 
         public bool Delete(RoleViewModel model)
         {
-            throw new NotImplementedException();
+            return repos.Delete(model.Id);
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return repos.Delete(id);
         }
 
         public RoleViewModel Get(int id)
         {
-            throw new NotImplementedException();
+            var roleObject = repos.Get(id);
+            Condition.Requires(roleObject).IsNotNull();
+            var roleViewModel = mapper.Map<Role, RoleViewModel>(roleObject);
+            Condition.Requires(roleViewModel).IsNotNull();
+            return roleViewModel;
         }
 
         public List<RoleViewModel> GetAll(Expression<Func<RoleViewModel, bool>> predicate = null)
@@ -65,7 +70,10 @@ namespace AppNet.Services.Service
 
         public bool Update(RoleViewModel model)
         {
-            throw new NotImplementedException();
+            var roleObject = mapper.Map<RoleViewModel, Role>(model);
+            Condition.Requires(roleObject).IsNotNull();
+
+            return repos.Update(roleObject);
         }
 
         public bool Update(int id)

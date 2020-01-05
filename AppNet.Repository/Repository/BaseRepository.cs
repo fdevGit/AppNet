@@ -4,6 +4,7 @@ using AppNet.Repository.Base;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -53,12 +54,14 @@ namespace AppNet.Repository.Repository
 
         public bool Delete(T entity)
         {
-            throw new NotImplementedException();
+            return Delete(entity.Id);
         }
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            //entityObject.FirstOrDefault(t => t.Id == Id);
+            entityObject.Remove(Get(Id));
+            return SaveChanges();
         }
 
         public T Get(int Id)
@@ -76,6 +79,9 @@ namespace AppNet.Repository.Repository
         {
             try
             {
+
+
+
                 context.SaveChanges();
                 return true;
             }
@@ -87,7 +93,24 @@ namespace AppNet.Repository.Repository
 
         public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            //if (context.Entry(entity).State == EntityState.Detached)
+            //{
+            //    entityObject.Attach(entity);
+            //}
+
+            //if (entity is ICreatable)
+            //{
+            //    var e = (ICreatable)entity;
+            //    e.CreateOn = DateTime.Now;
+            //}
+            //if (entity is IModifiable)
+            //{
+            //    var e = (IModifiable)entity;
+            //    e.ModifyOn = DateTime.Now;
+            //}
+
+            context.Set<T>().AddOrUpdate(entity);
+            return SaveChanges();
         }
     }
 }

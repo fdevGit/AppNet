@@ -24,7 +24,7 @@ namespace AppNet.WebApp.Attributes
         {
             base.HandleUnauthorizedRequest(filterContext);
             filterContext.Result = new RedirectToRouteResult(
-                new RouteValueDictionary(new { controller = "Error", action = "Unauthorised" })
+                new RouteValueDictionary(new { controller = "Account", action = "Login" })
                 ); 
         }
 

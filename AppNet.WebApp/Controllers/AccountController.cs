@@ -19,13 +19,148 @@ namespace AppNet.WebApp.Controllers
             roleService = _roleService;
             userServices = _userService;
         }
-       
-        //[AppAuthorize]
+
+        [AppAuthorize]
         public ActionResult Roles()
         {
             var model = roleService.GetAll();
             return View(model);
         }
+
+        [AppAuthorize]
+        public ActionResult UserEdit(int id)
+        {
+            var userModel = userServices.Get(id);
+            Condition.Requires(userModel).IsNotNull();
+
+            return View(userModel);
+        }
+
+        [HttpPost]
+        public ActionResult UserEdit(UserViewModel model)
+        {
+            try
+            {
+                var userModel = userServices.Update(model);
+                Condition.Requires(userModel).IsTrue();
+                return RedirectToAction("Users");
+            }
+            catch (Exception)
+            {
+
+                return View(model);
+            }
+        }
+
+        [AppAuthorize]
+        public ActionResult UserDelete(int id)
+        {
+            var userModel = userServices.Delete(id);
+            Condition.Requires(userModel).IsTrue();
+
+            return View(userModel);
+        }
+
+        [HttpPost]
+        public ActionResult UserDelete(UserViewModel model)
+        {
+            try
+            {
+                var userModel = userServices.Delete(model);
+                Condition.Requires(userModel).IsTrue();
+                return RedirectToAction("Users");
+            }
+            catch (Exception)
+            {
+
+                return View(model);
+            }
+        }
+
+        [AppAuthorize]
+        public ActionResult GetUser(int id)
+        {
+            var userModel = userServices.Delete(id);
+            Condition.Requires(userModel).IsTrue();
+
+            return View(userModel);
+        }
+
+        [HttpPost]
+        public ActionResult GetUser(UserViewModel model)
+        {
+            try
+            {
+                var userModel = userServices.Get(model.Id);
+                Condition.Requires(userModel).IsNotNull();
+                return RedirectToAction("Users");
+            }
+            catch (Exception)
+            {
+
+                return View(model);
+            }
+        }
+
+        [AppAuthorize]
+        public ActionResult RoleEdit(int id)
+        {
+            var roleModel = roleService.Get(id);
+            Condition.Requires(roleModel).IsNotNull();
+
+            return View(roleModel);
+        }
+
+        [HttpPost]
+        public ActionResult RoleEdit(RoleViewModel model)
+        {
+            try
+            {
+                var roleModel = roleService.Update(model);
+                Condition.Requires(roleModel).IsTrue();
+                return RedirectToAction("Roles");
+            }
+            catch (Exception)
+            {
+
+                return View(model);
+            }
+        }
+
+        [AppAuthorize]
+        public ActionResult RoleView(int id)
+        {
+            var roleModel = roleService.Get(id);
+            Condition.Requires(roleModel).IsNotNull();
+
+            return View(roleModel);
+        }
+
+        [AppAuthorize]
+        public ActionResult RoleDelete(int id)
+        {
+            var roleModel = roleService.Get(id);
+            Condition.Requires(roleModel).IsNotNull();
+
+            return View(roleModel);
+        }
+
+        [HttpPost]
+        public ActionResult RoleDelete(RoleViewModel model)
+        {
+            try
+            {
+                var roleModel = roleService.Delete(model);
+                Condition.Requires(roleModel).IsTrue();
+                return RedirectToAction("Roles");
+            }
+            catch (Exception)
+            {
+
+                return View(model);
+            }
+        }
+
         [AppAuthorize]
         public ActionResult RoleCreate()
         {
@@ -64,12 +199,13 @@ namespace AppNet.WebApp.Controllers
             }
         }
 
+        [AppAuthorize]
         public ActionResult Users()
         {
             var model = userServices.GetAll();
             return View(model);
         }
-
+        [AppAuthorize]
         public ActionResult UserCreate()
         {
             var model = new UserViewModel();

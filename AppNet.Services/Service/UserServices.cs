@@ -1,27 +1,28 @@
 ﻿using AppNet.Domain.Models;
+using AppNet.Repository.Base;
 using AppNet.Repository.Infrastructure;
-using AppNet.Repository.Repository;
 using AppNet.Services.Service.Infastructure;
 using AppNet.Services.Service.Managers;
 using AppNet.Services.ViewModels;
 using AutoMapper;
+using CuttingEdge.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppNet.Services.Service
 {
     public class UserService : IUserService
     {
         IUserRepository repository;
+        IBaseRepository<User> baseRepository;
         Mapper mapper;
 
-        public UserService(IUserRepository _userRepository)
+        public UserService(IUserRepository _userRepository, IBaseRepository<User> _baseRepository)
         {
             repository = _userRepository;
+            baseRepository = _baseRepository;
             var mapperConf = Configurations.MapperConfig.Configure();
             mapper = new Mapper(mapperConf);
         }
@@ -38,17 +39,20 @@ namespace AppNet.Services.Service
 
         public bool Delete(UserViewModel model)
         {
-            throw new NotImplementedException();
+            return baseRepository.Delete(model.Id);
+
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return baseRepository.Delete(id);
         }
 
         public UserViewModel Get(int id)
         {
-            throw new NotImplementedException();
+            var userObject = baseRepository.Get(id);
+            Condition.Requires(userObject).IsNotNull();
+            return mapper.Map<User, UserViewModel>(userObject);
         }
 
         public List<UserViewModel> GetAll(Expression<Func<UserViewModel, bool>> predicate = null)
@@ -73,12 +77,21 @@ namespace AppNet.Services.Service
 
         public bool Update(UserViewModel model)
         {
-            throw new NotImplementedException();
+            var userObject = mapper.Map<UserViewModel, User>(model);
+            Condition.Requires(userObject).IsNotNull();
+
+            userObject.ModifyOn = DateTime.Now;
+            userObject.CreateOn = DateTime.Now;
+            userObject.LastLoginDate = DateTime.Now;
+
+            return baseRepository.Update(userObject);
         }
 
         public bool Update(int id)
         {
-            throw new NotImplementedException();
+            //baseRepository.Get(id);
+            //return baseRepository.Update(id);
+            throw new Exception();
         }
     }
 }
